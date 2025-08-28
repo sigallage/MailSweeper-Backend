@@ -9,7 +9,12 @@ const PORT = process.env.PORT || 3000;
 
 // Middleware
 app.use(cors({
-  origin: ['http://localhost:5173', 'http://localhost:3000'],
+  origin: [
+    'http://localhost:5173', 
+    'http://localhost:3000',
+    'https://mail-sweep-frontend.vercel.app', 
+    process.env.FRONTEND_URL // Add this environment variable in Railway
+  ],
   credentials: true
 }));
 app.use(express.json());
@@ -62,7 +67,7 @@ app.get('/auth/callback', async (req, res) => {
     res.send(`
       <html>
         <head>
-          <title>MailPurge - Authorization Success</title>
+          <title>MailSweeper - Authorization Success</title>
           <style>
             body {
               font-family: Arial, sans-serif;

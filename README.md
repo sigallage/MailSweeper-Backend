@@ -168,4 +168,3 @@ MIT License - see root LICENSE file for details.
 ## ⚠️ Warning
 
 This API can permanently delete emails from Gmail accounts. Always verify operations before execution.
-# MailSweeper-Backend
