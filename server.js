@@ -21,6 +21,8 @@ app.use(cors({
       'https://mail-sweep-frontend.vercel.app',
       'https://mailsweeper-frontend.vercel.app',
       'https://mailsweeper.vercel.app',
+      'https://www.mailsweeper.live',
+      'https://mailsweeper.live',
       process.env.FRONTEND_URL
     ].filter(Boolean); // Remove undefined values
     
