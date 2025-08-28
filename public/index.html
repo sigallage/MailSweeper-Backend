@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'unsafe-inline'; script-src 'unsafe-inline';">
+    <title>MailPurge API</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0a0a0b;
+            color: #ffffff;
+            margin: 0;
+            padding: 2rem;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        h1 {
+            color: #6366f1;
+            border-bottom: 2px solid #6366f1;
+            padding-bottom: 0.5rem;
+        }
+        h2 {
+            color: #8b5cf6;
+            margin-top: 2rem;
+        }
+        .endpoint {
+            background: #161618;
+            border: 1px solid #2a2a2f;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        .method {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+        .get { background: #22c55e; }
+        .post { background: #ef4444; }
+        code {
+            background: #1f1f23;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            color: #f59e0b;
+        }
+        .warning {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        .status {
+            color: #22c55e;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📧 MailPurge API</h1>
+        <p>Backend API for the MailPurge email management application.</p>
+        
+        <div class="status">✅ API Server is running!</div>
+        
+        <div class="warning">
+            <strong>⚠️ Warning:</strong> This API can permanently delete emails from Gmail accounts. Use with extreme caution.
+        </div>
+
+        <h2>🔗 API Endpoints</h2>
+
+        <div class="endpoint">
+            <div>
+                <span class="method get">GET</span>
+                <code>/auth</code>
+            </div>
+            <p><strong>Description:</strong> Get Google OAuth authorization URL</p>
+            <p><strong>Response:</strong> <code>{ "authUrl": "https://..." }</code></p>
+        </div>
+
+        <div class="endpoint">
+            <div>
+                <span class="method post">POST</span>
+                <code>/auth/callback</code>
+            </div>
+            <p><strong>Description:</strong> Handle OAuth callback with authorization code</p>
+            <p><strong>Body:</strong> <code>{ "code": "authorization_code" }</code></p>
+            <p><strong>Response:</strong> <code>{ "success": true, "message": "Authentication successful" }</code></p>
+        </div>
+
+        <div class="endpoint">
+            <div>
+                <span class="method get">GET</span>
+                <code>/emails/senders</code>
+            </div>
+            <p><strong>Description:</strong> Get emails grouped by sender (requires authentication)</p>
+            <p><strong>Response:</strong> Array of sender objects with email counts and message IDs</p>
+        </div>
+
+        <div class="endpoint">
+            <div>
+                <span class="method post">POST</span>
+                <code>/emails/delete</code>
+            </div>
+            <p><strong>Description:</strong> Delete specified emails (requires authentication)</p>
+            <p><strong>Body:</strong> <code>{ "messageIds": ["id1", "id2", ...] }</code></p>
+            <p><strong>Response:</strong> <code>{ "success": true, "message": "Successfully deleted X emails" }</code></p>
+        </div>
+
+        <h2>🚀 Getting Started</h2>
+        <ol>
+            <li>Set up Google OAuth credentials in your <code>.env</code> file</li>
+            <li>Use the React frontend at <code>http://localhost:5173</code></li>
+            <li>Or make direct API calls to these endpoints</li>
+        </ol>
+
+        <h2>🔒 Security</h2>
+        <ul>
+            <li>OAuth 2.0 authentication with Google</li>
+            <li>CORS enabled for frontend origins</li>
+            <li>Minimal required Gmail permissions</li>
+            <li>No permanent credential storage</li>
+        </ul>
+
+        <p style="text-align: center; margin-top: 3rem; color: #666;">
+            <strong>MailPurge Backend API</strong> - Built with Node.js & Express
+        </p>
+    </div>
+</body>
+</html>
