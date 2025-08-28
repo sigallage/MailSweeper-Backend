@@ -9,16 +9,29 @@ const PORT = process.env.PORT || 3000;
 
 // Middleware
 app.use(cors({
-  origin: [
-    'http://localhost:5173', 
-    'http://localhost:3000',
-    'https://mail-sweep-frontend.vercel.app',
-    'https://mailsweeper-frontend.vercel.app',
-    'https://mailsweeper.vercel.app',
-    /\.vercel\.app$/, // Allow any Vercel domain
-    process.env.FRONTEND_URL // Add this environment variable in Railway
-  ],
-  credentials: true
+  origin: function (origin, callback) {
+    // Allow requests with no origin (like mobile apps or curl requests)
+    if (!origin) return callback(null, true);
+    
+    const allowedOrigins = [
+      'http://localhost:5173', 
+      'http://localhost:3000',
+      'https://mail-sweep-frontend.vercel.app',
+      'https://mailsweeper-frontend.vercel.app',
+      'https://mailsweeper.vercel.app',
+      process.env.FRONTEND_URL
+    ].filter(Boolean); // Remove undefined values
+    
+    // Check if origin is in allowed list or is a Vercel domain
+    if (allowedOrigins.includes(origin) || /\.vercel\.app$/.test(origin)) {
+      return callback(null, true);
+    }
+    
+    return callback(new Error('Not allowed by CORS'));
+  },
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
 }));
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
