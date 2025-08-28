@@ -12,7 +12,10 @@ app.use(cors({
   origin: [
     'http://localhost:5173', 
     'http://localhost:3000',
-    'https://mail-sweep-frontend.vercel.app', 
+    'https://mail-sweep-frontend.vercel.app',
+    'https://mailsweeper-frontend.vercel.app',
+    'https://mailsweeper.vercel.app',
+    /\.vercel\.app$/, // Allow any Vercel domain
     process.env.FRONTEND_URL // Add this environment variable in Railway
   ],
   credentials: true
