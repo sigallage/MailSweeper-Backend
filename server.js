@@ -74,7 +74,7 @@ app.get('/health', (req, res) => {
 app.get('/auth', (req, res) => {
   const authUrl = oauth2Client.generateAuthUrl({
     access_type: 'offline',
-    scope: ['https://mail.google.com/']
+    scope: ['https://www.googleapis.com/auth/gmail.modify']
   });
   res.json({ authUrl });
 });
